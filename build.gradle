@@ -1,0 +1,150 @@
+buildscript{
+    repositories{
+        jcenter()
+    }
+
+    dependencies{
+        classpath group : 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version:'1.4.2.RELEASE'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'  //org.springframework.boot
+apply plugin: 'project-report'
+apply plugin: 'build-dashboard'
+apply plugin: 'jacoco'   //show loading off our application time loading off each action
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'   //illustrated html and xml main tests
+
+version = '1.0.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+//для замещения занчений статическими вставками
+ext{
+    guavaVersion = '19.0'
+
+//                  '4.0.0.GA'  for spring 3
+    jadiraVersion = '5.0.0.GA'  //for spring 4
+    swaggerVersion = '2.3.0'
+    jacocoVersion = '0.7.5.201505241946'
+    checkStyleVersion = '6.16.1'
+    pmdVersion = '5.4.1'
+}
+
+repositories{
+    jcenter()
+}
+
+dependencies {
+
+//  это идентично этой строке вроде бы )
+    compile group : 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group : 'org.springframework.boot', name: 'spring-boot-starter-actuator'
+    compile group : 'org.springframework.boot', name: 'spring-boot-starter-security'
+    compile group : 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+
+    compile group : 'org.springframework', name: 'spring-context-support'
+
+    compile group : 'joda-time', name: 'joda-time'
+    compile group : 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-joda'
+
+//  for spring 3
+    compile group : 'com.google.guava', name: 'guava', version:guavaVersion
+//  for spring 4
+    compile group : 'com.github.ben-manes.caffeine', name: 'caffeine'
+
+    compile group : 'org.jadira.usertype', name: 'usertype.extended', version: jadiraVersion
+    compile group : 'io.springfox', name: 'springfox-swagger2', version:swaggerVersion
+    compile group : 'io.springfox', name: 'springfox-swagger-ui', version:swaggerVersion
+
+    runtime group : 'org.hsqldb', name: 'hsqldb'
+    runtime group : 'mysql', name: 'mysql-connector-java'
+
+    testCompile group : 'org.springframework.boot', name: 'spring-boot-starter-test'
+}
+
+defaultTasks 'clean', 'build'
+
+springBoot{
+
+//    make the application to be executable by Internet services
+    executable=true
+//    get the information about application by url ../info
+    buildInfo()
+}
+
+jacoco{
+    toolVersion = jacocoVersion
+}
+
+jacocoTestReport {
+    reports{
+        html.enabled = true
+        xml.enabled = true
+        csv.enabled = true
+    }
+}
+
+test {
+    testLogging {
+        exceptionFormat = 'full'
+    }
+}
+
+test.finalizedBy jacocoTestReport
+
+checkstyle {
+    toolVersion = checkStyleVersion
+    config = rootProject.resources.text.fromFile('etc/checkstyle/rules.xml')
+}
+
+
+pmd {
+    toolVersion = pmdVersion
+    ruleSetConfig = rootProject.resources.text.fromFile('etc/pmd/ruleset.xml')
+    ignoreFailures =true
+}
+
+check.finalizedBy projectReport
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

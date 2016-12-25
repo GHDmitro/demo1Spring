@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sun Nov 20 23:52:24 EET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.0 - (1405108): instance a816c00e-0158-83b9-d7ac-000005a148a0 
+on database directory memory:/Users/macbookair/IdeaProjects/demo1Spring/testdb  with class loader sun.misc.Launcher$AppClassLoader@5f184fc6 
+Loaded from file:/Users/macbookair/.m2/repository/org/apache/derby/derby/10.8.3.0/derby-10.8.3.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_60-b27
+user.dir=/Users/macbookair/IdeaProjects/demo1Spring
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.12
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
